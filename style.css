@@ -1,0 +1,142 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1{
+    margin: 2rem auto;
+    font-size: 4em;
+    text-align: center;
+    color: #eaee10;
+}
+
+
+
+body{
+    background-image: url(background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+#toy-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    background-color: rgba(211, 32, 32, 0.959);
+    position: relative;
+    width: 70rem;
+    height: 40rem;
+    margin: 0 auto;
+    border-radius: 3rem;
+}
+
+#toy-container p{
+font-size: 3rem;
+color: rgb(248, 248, 40);
+}
+
+#screen{
+    display: grid;
+    background-color: #fff;
+    width: 55rem;
+    height: 30rem;
+}
+
+#picker-container{
+    border-radius: 100%;
+    width: 1rem;
+    height: 2rem;
+}
+
+.square{
+    background-color: #fff;
+}
+
+
+
+input[type="color"] {
+    width: 0;
+    height: 0;
+   opacity: 0;
+}
+
+.change-color{
+    background: linear-gradient(#db1f1f,#ffe602,#20ff03,#0218e6,#ff0bf3);
+   
+}
+
+
+
+button{
+    border-radius: 100%;
+    width: 5rem;
+    height: 5rem;
+    transition: all .5s ease;
+    font-size: 1.2rem;
+}
+
+button:hover{
+    transform: scale(1.3,1.3);
+  }
+
+#buttons-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.change-grid{
+   
+    position: relative;
+   
+}
+
+.eight-per-eight{
+    grid-template-columns: repeat(8,1fr);
+    grid-template-rows: repeat(auto-fit,1fr);
+}
+.sixteen-per-sixteen{
+    grid-template-columns: repeat(16,1fr);
+    grid-template-rows: repeat(auto-fit,1fr);
+}
+
+
+.thirtytwo-per-thirtytwo{
+    grid-template-columns: repeat(32,1fr);
+    grid-template-rows: repeat(auto-fit,1fr);
+}
+
+.sixtyfour-per-sixtyfour{
+    grid-template-columns: repeat(64,1fr);
+    grid-template-rows: repeat(auto-fit,1fr);
+}
+
+#options-container{
+    opacity: 0;
+    width: 10rem;
+    height: 8rem;
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(auto-fit,1fr);
+   z-index: -1;
+}
+
+#options-container > div{
+
+font-size: 2em;
+border: 1px solid #000;
+background-color: #fff;
+}
+
+#options-container > div:hover{
+   filter: sepia(100%);
+}
+
