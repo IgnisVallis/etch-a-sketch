@@ -7,6 +7,24 @@ let squares = 256;
 let pickedColor = color.value;
 let fragment = document.createDocumentFragment();
 let mouseDownActivated = false;
+let red = 0;
+let green = 0;
+let blue = 0;
+let rainbowMode = false;
+let grayMode = false;
+let currentGrayScale;
+const GRAY_LEVEL = {
+  "" : "brightness(0.9)",
+  "brightness(0.9)" : "brightness(0.8)",
+  "brightness(0.8)" : "brightness(0.7)",
+  "brightness(0.7)" : "brightness(0.6)",
+  "brightness(0.6)" : "brightness(0.5)",
+  "brightness(0.5)" : "brightness(0.4)",
+  "brightness(0.4)" : "brightness(0.3)",
+  "brightness(0.3)" : "brightness(0.2)",
+  "brightness(0.2)" : "brightness(0.1)",
+  "brightness(0.1)" : "brightness(0.0)",
+}
 
 function changeGrid(){
 grid.innerHTML = "";
@@ -17,20 +35,42 @@ fragment.appendChild(SQUARE);
   }
 grid.appendChild(fragment);
 }
-
 changeGrid();
-
 grid.addEventListener("mousedown", e=>{
   mouseDownActivated = true;
-  pickedColor = color.value;
-  e.target.style.background = pickedColor;
-})
+  if(rainbowMode){
+    red = Math.round(Math.random() * 256);
+    blue = Math.round(Math.random() * 256);
+    green = Math.round(Math.random() * 256);
+    pickedColor = `rgb(${red} ${green} ${blue})`;
+    e.target.style.background = pickedColor;
+  }else if(grayMode){
+    currentGrayScale = e.target.style.filter;
+     e.target.style.filter = GRAY_LEVEL[currentGrayScale];
+  }
+  else{ 
+    pickedColor = color.value;
+    e.target.style.background = pickedColor;
+    }
+  })
 
 
 grid.addEventListener("mouseover", e =>{
 if(mouseDownActivated){
-  pickedColor = color.value;
-  e.target.style.background = pickedColor;
+  if(rainbowMode){
+    red = Math.round(Math.random() * 256);
+    blue = Math.round(Math.random() * 256);
+    green = Math.round(Math.random() * 256);
+    pickedColor = `rgb(${red} ${green} ${blue})`;
+    e.target.style.background = pickedColor;
+  }else if(grayMode){
+    currentGrayScale = e.target.style.filter;
+     e.target.style.filter = GRAY_LEVEL[currentGrayScale];
+}
+  else{ 
+    pickedColor = color.value;
+    e.target.style.background = pickedColor;
+    }
   }
 })
 
@@ -74,14 +114,29 @@ optionsContainer.addEventListener("mouseup", e =>{
   });
 
 buttons.addEventListener("click", e=>{
-    if(e.target.classList.contains("change-color")) color.click();
+    if(e.target.classList.contains("change-color")){ 
+      color.click();
+      rainbowMode = false;
+      grayMode = false;
+    }
     else if(e.target.classList.contains("delete"))changeGrid();
     else if(e.target.classList.contains("rubber")) color.value = "#ffffff";
-    else if(e.target.classList.contains("pen")) color.value = "#000000";
+    else if(e.target.classList.contains("pen")){ 
+      color.value = "#000000";
+      rainbowMode = false;
+      grayMode = false;
+    }
     else if(e.target.classList.contains("toggle-grid")){ 
       optionsContainer.style.opacity = 1;
       optionsContainer.style["z-index"] = 100;
     }
-})
+    else if(e.target.classList.contains("rainbow")){ 
+      rainbowMode = true;
+      grayMode = false;
+    }
+      else if(e.target.classList.contains("gray-scale")){ grayMode = true
+      rainbowMode = false;
+      };
+  })
 
 
